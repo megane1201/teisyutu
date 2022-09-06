@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    </head>
+    <body>
+        <div id="message">
+        </div>
+        <form>
+            <hr/>
+            <label> Q1「ABC」から始まる文字列：</label>
+            <input type="text" name="Q1" id="inputQ1" maxlength="100" value="" placeholder="">
+            <br/>
+            <label> Q2「ABC」から始まり「XYZ」で終わる文字列：</label>
+            <input type="text" name="Q2" id="inputQ2" maxlength="100" value="" placeholder="">
+            <br/>
+            <label> Q3「DEF」が含まれる文字列：</label>
+            <input type="text" name="Q3" id="inputQ3" maxlength="100" value="" placeholder="">
+            <br/>
+            <label> Q4「@」の前後に１文字以上存在している文字列：</label>
+            <input type="text" name="Q4" id="inputQ4" maxlength="100" value="" placeholder="">
+            <br/>
+            <label> Q5「０～９」までの整数で構成される3ケタの数字：</label>
+            <input type="text" name="Q5" id="inputQ5" maxlength="100" value="" placeholder="">
+            <br/>
+            <label> Q6 数字と大文字アルファベットを含まない文字列：</label>
+            <input type="text" name="Q6" id="inputQ6" maxlength="100" value="" placeholder="">
+            <br/>
+            <input type="button" id="btnSubmit" value="送信する">
+            <hr/>
+        </form>
+    </body>
+</html>
+
+
+<script>
+    window.onload = function(){
+        /*各画面オブジェクト*/
+        const Q1 = document.getElementById('inputQ1');
+        const Q2 = document.getElementById('inputQ2');
+        const Q3 = document.getElementById('inputQ3');
+        const Q4 = document.getElementById('inputQ4');
+        const Q5 = document.getElementById('inputQ5');
+        const Q6 = document.getElementById('inputQ6');
+        const  regQ1= /^ABC/;
+        const  regQ2= /^ABC.*XYZ$/;
+        const  regQ3= /DEF/;
+        const  regQ4= /\^w*@{1}\w$/;
+        const  regQ5= /^[0-9]{3}$/;
+        const  regQ6= /[A-Z0-9]/;
+        
+        
+        btnSubmit.addEventListener('click', function(event) {
+            let message = [];
+            /*入力値チェック*/
+            if(Q1.value == ""){
+                message.push("Q1 未入力");
+            }else if(!regQ1.test(Q1.value)){
+                message.push("Q1 失敗");
+            }
+
+
+            if(Q2.value == ""){
+                message.push("Q2 未入力");
+            }else if(!regQ2.test(Q2.value)){
+                message.push("Q2 失敗");
+            }
+
+
+            if(Q3.value == ""){
+                message.push("Q3 未入力");
+            }else if(!regQ3.test(Q3.value)){
+                message.push("Q3 失敗");
+            }
+
+
+            if(Q4.value == ""){
+                message.push("Q4 未入力");
+            }else if(!regQ4.test(Q4.value)){
+                message.push("Q4 失敗");
+            }
+
+
+            if(Q5.value == ""){
+                message.push("Q5 未入力");
+            }else if(!regQ5.test(Q5.value)){
+                message.push("ザッコ！！！！！！！！！");
+            }
+
+
+            if(Q6.value == ""){
+                message.push("Q6 未入力");
+            }else if(regQ6.test(Q6.value)){
+                message.push("Q6 失敗");
+            }
+
+
+            if(message.length > 0){
+                alert(message);
+                return;
+            }
+            alert('送信成功');
+        });
+    }
+</script>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    </head>
+    <body>
+        <div id="message">
+        </div>
+        <form>
+            <hr/>
+            <label>氏名：</label>
+            <input type="text" name="name"  id="inputName"  maxlength="100" value="" placeholder="氏名を入力してください">
+            <br/>
+            <label>年齢：</label>
+            <input type="number" name="age" id="inputAge" value="">
+            <br/>
+            <label>パスワード：</label>
+            <input type="text" name="ps" id="inputPs" maxlength="100" value="" placeholder="パスワード">
+            <br/>
+            <input type="button" id="btnSubmit" value="送信する">
+            <hr/>
+        </form>
+    </body>
+</html>
+
+<script>
+    window.onload = function(){
+        /*各画面オブジェクト*/
+        const btnSubmit = document.getElementById('btnSubmit');
+        const inputName = document.getElementById('inputName');
+        const inputAge = document.getElementById('inputAge');
+        const inputPs = document.getElementById('inputPs');
+        const regName = /^\W$/;
+        const regAge = /^([0-9]|[1-9][0-9]|1[0-4][0-9]|150)$/;
+        const regPs = /^(?=.*[A-Z])(?=.*[a-z])[A-Za-z]{8,}$/;
+        
+        
+        btnSubmit.addEventListener('click', function(event) {
+            let message = [];
+            /*入力値チェック*/
+            if(inputName.value ==""){
+                message.push("氏名が未入力です。");
+            }else if(regName.test(inputName.value)){
+                message.push("氏名の形式が不正です。");
+            }
+            if(inputAge.value==""){
+                message.push("年齢が未入力です。");
+            }else if(!regAge.test(inputAge.value)){
+                message.push("年齢の形式が不正です。");
+            }
+            if(inputPs.value==""){
+                message.push("パスワードが未入力です。");
+            }else if(!regPs.test(inputPs.value)){
+                message.push("パスワードの形式が不正です。");
+            }
+            if(message.length > 0){
+                alert(message);
+                return;
+            }
+            alert('送信成功');
+        });
+    }
+</script>
+   
